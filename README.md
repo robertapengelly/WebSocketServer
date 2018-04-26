@@ -36,8 +36,6 @@ Run using the following command...
     python WebSocketServer --host host --port port --file file --socket socketclass
     (e.g. python WebSocketServer --host 127.0.0.1 --port 8443 --file /home/user/echosocket.py --socket SimpleEcho)
 
-Note: If you create a file/directory as root you may need to run the command with sudo.
-
 #### Chat Server Example
 `````python
 from WebSocketServer import WebSocket
@@ -68,8 +66,6 @@ Run using the following command...
 
     python WebSocketServer --host host --port port --file file --socket socketclass
     (e.g. python WebSocketServer --host 127.0.0.1 --port 8443 --file /home/user/chatsocket.py --socket SimpleChat)
-
-Note: If you create a file/directory as root you may need to run the command with sudo.
 
 #### Want to get up and running faster?
 
