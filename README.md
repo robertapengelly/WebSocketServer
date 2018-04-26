@@ -20,14 +20,14 @@ from WebSocketServer import WebSocket
 
 class SimpleEcho(WebSocket):
 
-    def handleMessage(self):
+    def handle_message(self):
         # echo message back to client
-        self.sendMessage(self.data)
+        self.send_message(self.data)
 
-    def handleConnected(self):
+    def handle_connected(self):
         print(self.address, 'connected')
 
-    def handleClose(self):
+    def handle_close(self):
         print(self.address, 'closed')
 `````
 
@@ -44,22 +44,22 @@ clients = []
 
 class SimpleChat(WebSocket):
 
-    def handleMessage(self):
+    def handle_message(self):
         for client in clients:
             if client != self:
-                client.sendMessage(self.address[0] + u' - ' + self.data)
+                client.send_message(self.address[0] + u' - ' + self.data)
 
-    def handleConnected(self):
+    def handle_connected(self):
         print(self.address, 'connected')
         for client in clients:
-            client.sendMessage(self.address[0] + u' - connected')
+            client.send_message(self.address[0] + u' - connected')
         clients.append(self)
 
-    def handleClose(self):
+    def handle_close(self):
         clients.remove(self)
         print(self.address, 'closed')
         for client in clients:
-            client.sendMessage(self.address[0] + u' - disconnected')
+            client.send_message(self.address[0] + u' - disconnected')
 `````
 
 Run using the following command...
@@ -75,7 +75,7 @@ Echo Server
 
     python WebSocketServer --host 0.0.0.0 --port 8443 --file examplewebsockets.py --socket SimpleEchoWebSocket
 
-Chat Server (open up multiple *websocket.html* files)
+Chat Server
 
     python WebSocketServer --host 0.0.0.0 --port 8443 --file examplewebsockets.py --socket SimpleChatWebSocket
 
@@ -90,19 +90,19 @@ Note: The --ssldir is optional as you can include the full paths to the cert and
 
 #### For the Programmers
 
-handleConnected: called when handshake is complete
+handle_connected: called when handshake is complete
  - self.address: TCP address port tuple of the endpoint
 
-handleClose: called when the endpoint is closed or there is an error
+handle_close: called when the endpoint is closed or there is an error
  - self.address: TCP address port tuple of the endpoint
 
-handleMessage: gets called when there is an incoming message from the client endpoint
+handle_message: gets called when there is an incoming message from the client endpoint
  - self.address: TCP address port tuple of the endpoint
  - self.opcode: the WebSocket frame type (STREAM, TEXT, BINARY)
  - self.data: bytearray (BINARY frame) or unicode string payload (TEXT frame)  
  - self.request: HTTP details from the WebSocket handshake (refer to BaseHTTPRequestHandler)
 
-sendMessage: send some text or binary data to the client endpoint
+send_message: send some text or binary data to the client endpoint
  - sending data as a unicode object will send a TEXT frame
  - sending data as a bytearray object will send a BINARY frame
 
