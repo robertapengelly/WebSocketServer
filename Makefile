@@ -5,9 +5,9 @@ clean:
 	find . -name "*.pyc" -delete
 	find . -name "*.class" -delete
 
-PREFIX		?= /usr/local
-BINDIR		?= $(PREFIX)/bin
-PYTHON		?= /usr/bin/env python
+PREFIX ?= /usr/local
+BINDIR ?= $(PREFIX)/bin
+PYTHON ?= /usr/bin/env python
 
 install: WebSocketServer
 	install -d $(DESTDIR)$(BINDIR)
@@ -19,14 +19,13 @@ install: WebSocketServer
 WebSocketServer: WebSocketServer/*py
 	mkdir -p zip
 	for d in WebSocketServer; do \
-		mkdir -p zip/$$d; \
-		cp -pPR $$d/*.py zip/$$d/; \
+	  mkdir -p zip/$$d; \
+	  cp -pPR $$d/*.py zip/$$d/; \
 	done
 	touch -t 200001010101 zip/WebSocketServer/*.py
 	cp __main__.py zip/
 	cd zip; zip -q ../WebSocketServer WebSocketServer/*.py __main__.py
-	rm -rf zip
-	rm -rf bin
+	rm -rf zip bin
 	mkdir bin
 	echo '#!$(PYTHON)' > bin/WebSocketServer
 	cat WebSocketServer.zip >> bin/WebSocketServer
