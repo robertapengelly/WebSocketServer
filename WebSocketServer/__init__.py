@@ -86,7 +86,7 @@ def parse_opts(override=None):
         action="store", dest="pkey", help="pkey (privkey.pem)")
     parser.add_option("--ver", default=ssl.PROTOCOL_TLSv1, type=int,
         action="store", dest="ver", help="ssl version")
-    parser.add_option("--file", default='examplewebsockets', type='string',
+    parser.add_option("--file", default='', type='string',
         action="store", dest="file",
         help="WebSocket Class File (e.g examplewebsockets)")
     parser.add_option("--socket", default='WebSocket', type='string',
