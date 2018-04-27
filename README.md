@@ -1,6 +1,3 @@
-# WebSocketServer
-A python based websocket server that is simple and easy to use.
-
 ## A Simple Websocket Server written in Python
 
 - RFC 6455 (All latest browsers)
