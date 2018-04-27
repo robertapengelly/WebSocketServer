@@ -14,7 +14,7 @@ install: WebSocketServer
 	install -m 755 bin/WebSocketServer $(DESTDIR)$(BINDIR)
 	rm -rf bin
 
-tar: WebSocketServer.tar.gz
+.PHONY: all clean install
 
 WebSocketServer: WebSocketServer/*py
 	mkdir -p zip
